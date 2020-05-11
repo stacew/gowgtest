@@ -73,7 +73,8 @@ func main() {
 	roomName := "Room1"
 	server.OnEvent("/chat",
 		"cJoin", func(s socketio.Conn) {
-			fmt.Println("/chat :", s.ID()) //
+			fmt.Println("/chat cJoin:", s.ID())
+
 			user := &userinfo{minute: strconv.Itoa(time.Now().Minute()),
 				second: strconv.Itoa(time.Now().Second())}
 			s.SetContext(user)
@@ -107,7 +108,7 @@ func main() {
 	defer server.Close()
 
 	server.OnConnect("/", func(s socketio.Conn) error {
-		fmt.Println("/ :", s.ID()) //
+		fmt.Println("/:", s.ID())
 		return nil
 	})
 	http.Handle("/", http.FileServer(http.Dir("./public")))

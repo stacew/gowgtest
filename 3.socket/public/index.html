@@ -11,11 +11,12 @@
     <button id='room1' onclick="joinRoom();">Room</button>
     <button onclick="exitRoom();">Exit</button>
 
-    <ul id="messages"></ul>
     <form action="">
         <input id="m" autocomplete="off" />
         <button>Send</button>
     </form>
+
+    <ul id="messages"></ul>
 
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
@@ -31,10 +32,10 @@
 
         chatio.on('sChat', function (msg) {
             //내가 보낸 메시지 구별 client에서 처리해야함?
-            $('#messages').append($('<li>').text(msg));
+            $('#messages').prepend($('<li>').text(msg));
         });
         chatio.on('sExit', function (msg) {
-            $('#messages').append($('<li>').text(msg));
+            $('#messages').prepend($('<li>').text(msg));
         });
 
         $('form').submit(function () {
