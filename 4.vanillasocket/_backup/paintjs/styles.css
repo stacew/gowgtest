@@ -1,0 +1,62 @@
+@import "reset.css";
+:root{
+    --boxShadow: 1px 2px 4px rgb(150, 150, 150);
+    --boderRadius : 5%;
+}
+
+
+
+
+body{
+    background-color: #f6f9fc;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+
+.canvas{
+    margin:30px;
+    width: 700px;
+    height: 700px;
+    background-color: white;
+    border-radius: var(--boderRadius);
+    box-shadow: var(--boxShadow);
+}
+.controls{
+    /* margin-top:80px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.controls__range{
+    margin: 5px;
+}
+
+.controls__btns button {
+    all:unset;
+    cursor: pointer;
+    padding: 5px 10px;
+    text-align: center;
+    background-color: white;
+    margin: 20px 10px;
+    width: 100px;
+    text-emphasis: center;
+    text-transform: uppercase;
+    box-shadow: var(--boxShadow);
+    font-size : 20px;
+}
+.controls__btns button:active {
+    transform: scale(0.95);
+}
+
+.controls__colors{
+    display: flex;
+}
+
+.controls__color{
+    margin: 10px 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: var(--boxShadow);
+}

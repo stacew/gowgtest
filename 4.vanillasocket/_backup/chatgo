@@ -1,0 +1,34 @@
+
+	roomName := "Room1"
+	server.OnEvent("/chat",
+		"cJoin", func(s socketio.Conn) {
+			fmt.Println("/chat cJoin:", s.ID())
+
+			user := &userinfo{minute: strconv.Itoa(time.Now().Minute()),
+				second: strconv.Itoa(time.Now().Second())}
+			s.SetContext(user)
+			server.JoinRoom("/chat", roomName, s)
+			server.BroadcastToRoom("/chat", roomName,
+				"sChat", "["+user.GetStrTime()+"]"+"Join id: "+s.ID()+", room: "+roomName)
+		})
+
+	server.OnEvent("/chat",
+		"cbChat", func(s socketio.Conn, msg string) {
+			server.BroadcastToRoom("/chat", roomName,
+				"sChat", s.ID()+" => "+msg)
+		})
+
+	server.OnEvent("/chat",
+		"cExit", func(s socketio.Conn) {
+			fmt.Println("[ EXIT ID ]: ", s.ID())
+			s.Close()
+			server.BroadcastToRoom("/chat", roomName,
+				"sExit", "[ Exit ID ]: "+s.ID())
+		})
+
+	server.OnError("/chat", func(s socketio.Conn, e error) {
+		fmt.Println("[ ERROR ]: ", e, " [ ID ]: ", s.ID())
+	})
+	server.OnDisconnect("/chat", func(s socketio.Conn, reason string) {
+		fmt.Println("[ Disconnect ]: ", reason, " [ ID ]: ", s.ID())
+	})

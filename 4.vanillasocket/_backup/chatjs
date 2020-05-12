@@ -1,0 +1,23 @@
+
+        var chatio = io('/chat2');
+
+        function joinRoom() {
+            chatio.emit('cJoin');
+        }
+        function exitRoom() {
+            chatio.emit('cExit');
+        }
+
+        chatio.on('sChat', function (msg) {
+            //내가 보낸 메시지 구별 client에서 처리해야함?
+            $('#messages').prepend($('<li>').text(msg));
+        });
+        chatio.on('sExit', function (msg) {
+            $('#messages').prepend($('<li>').text(msg));
+        });
+
+        $('form').submit(function () {
+            chatio.emit('cbChat', $('#m').val());
+            $('#m').val('');
+            return false;
+        });
