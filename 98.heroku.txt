@@ -1,0 +1,22 @@
+cmd
+
+> heroku login
+
+내 프로젝트 폴더로 이동해서
+> heroku create
+
+> git push heroku master
+하면 빌드 + 실행까지 함.
+
+> heroku open
+하면 브라우저 열림
+
+> heroku logs --tail
+로그를 뒤에서부터 보고 싶다
+
+> heroku ps
+bin/프로젝트이름(1) <- 프로세스 개수 알 수 있음.
+
+> heroku ps:scale web=2
+2개 비용 올림. free버전은 불가능
+0개로 하면 서비스 멈춤.
